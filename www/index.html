@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--Ajout leaflet-->
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <script src="js/leaflet.js"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="./mdl/material.min.css">
+    <script src="./mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+    <title>Clash and Connect</title>
+    </head>
+    <body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+mdl-layout--fixed-tabs">
+
+<main class="mdl-layout__content">
+    <div id="page-content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="page-content">
+                
+    
+            </div>
+        </section>
+        
+        
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content">
+                <div id="map"></div>
+            </div>
+
+            </section>
+       
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+
+            <div class="page-content">Mettre le chat ici
+
+            </div>
+
+            </section>
+        
+            <section class="mdl-layout__tab-panel" id="fixed-tab-4">
+            <div class="page-content">
+                <center>
+                    <h1>Mon Profil</h1>
+                    <h2>Nom de la personne</h2>
+                    <div>Description du profil</div>
+                    <div id="photos"></div>
+                    <button id="modif_photos">Modifier mes photos</button>
+                    <button>Modifier le profil</button>
+                    <button id="Storage">Vider le local Storage</button>
+                    <button>Se déconnecter</button>
+                </center>
+            </div>
+        </section>
+        </div>
+        <div id="error">
+            <center>
+            <h1>Erreur</h1>
+            <h2>Vous n'êtes pas connecté à internet</h2>
+            <h3>Veuillez vous connecter à internet pour utiliser l'application</h3>
+            <img id='NoWifi' src='./img/NoWifi.png' alt='NoWifi'>
+            <button id="Active_DATA">Activer les données mobiles</button>
+            </center>
+        </div>
+</main>
+<footer id="footer" class="mdl-layout__header">
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+    <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Découvrir</a>
+    <a href="#fixed-tab-2" class="mdl-layout__tab">Map</a>
+    <a href="#fixed-tab-3" class="mdl-layout__tab">Chat</a>
+    <a href="#fixed-tab-4" id="Profil" class="mdl-layout__tab">Profil</a>
+    </div>
+    </footer>
+</div>
+        
+        <script src="cordova.js"></script>
+        
+        <script src="js/index.js"></script>
+        
+    </body>
+</html>

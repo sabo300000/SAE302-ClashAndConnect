@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--Ajout leaflet-->
+        <link rel="stylesheet" href="css/leaflet.css" />
+        
+
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="./mdl/material.min.css">
+    <script src="./mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Clash and COnnect</title>
+    </head>
+    <body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+mdl-layout--fixed-tabs">
+
+<main>
+
+
+    
+<div class="page-content">
+    <div id="map"></div>
+</div>
+<div>
+    <button id="appel_api">Chercher les salles</button>
+    <p id="print"></p>
+    <p id="salle"></p>
+</div>
+
+
+</main>
+
+</div>
+        <script src="./js/leaflet.js"></script>
+        <script src="cordova.js"></script>
+        <script src="./js/index.js"></script>
+        
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <!-- Add your profiles here -->
+              <div class="swiper-slide">
+                <img src="./img/pierre/pdp.jpeg" alt="Photo de profil">
+              </div>
+              <div class="swiper-slide">
+                <img src="./img/pierre/side_1.jpeg" alt="A changer">
+            </div>
+              <div class="swiper-slide">
+                <img src="./img/pierre/side_2.jpeg" alt="A changer">
+              </div> 
+              <!-- ... -->
+            </div>
+          
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <div>Carroussel des profils comme tinder</div>  
+    <!---Carroussel tinder like-->
+    <!--Swipe les profils pour like ou dislike les photos  -->
+    </body>
+</html>

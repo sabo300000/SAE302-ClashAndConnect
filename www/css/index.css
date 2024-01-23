@@ -1,0 +1,91 @@
+
+
+*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    background-color:#E4E4E4;
+    font-size:12px;
+    height:100vh;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    
+}
+
+
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+#deviceready.ready .event.listening { display: none; }
+#deviceready.ready .event.received { display: block; }
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+#map { height: 900px; }
+
+#NoWifi{
+    
+    width: 80%;
+    height: 90%;
+}
+#Active_DATA{
+    
+    display: flex;
+}
+#photos{
+    width: 300px;
+    height: 300px;
+}
+#image{
+    width: 80%;
+    height: 80%;
+}
+
+
+button{
+    height: 40px;
+    width: 100px;
+    background-color: #333492;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
