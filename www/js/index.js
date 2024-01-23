@@ -258,19 +258,69 @@ function statechange(event)
 
 
 function NewPhotos() {
-	console.log("Nouvelle photo");
-	navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45,
-		destinationType: Camera.DestinationType.DATA_URL
-	});
+	console.log("Autorisation de l'accès à la caméra");
+	cordova.plugins.diagnostic.isCameraAuthorized(successCallback_Auto, errorCallback, storage)
 	
 }
 
+function successCallback_Auto(status){
+	console.log("Le statut est :" + status);
+	if(status == true){
+		console.log("L'accès à la caméra est autorisé");
+		console.log("Nouvelle photo");
+		navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
+	}
+	else if (status == false){
+		cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
+	}
+	
+}
+
+function successCallback(status){
+	console.log("Le statut est :" + status);
+	switch(status){
+        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+            console.log("La Permission d'utiliser la caméra");
+			navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
+
+            break;
+        case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+            console.log("La permission n'a pas été demandée");
+			cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
+            break;
+        case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
+            console.log("La Permission a été refusée");
+			cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
+            break;
+        case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+            console.log("La Permission d'utiliser la caméra:)");
+			console.log("Problème Samsung à régler")
+			navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
+            break;
+    }
+}
+function errorCallback(error){
+	console.log("L'accès à la caméra a été refusé");
+	console.log(error);
+
+}
+
+function storage(){
+	console.log("L'accès au stockage est autorisé");
+	if(cordova.plugins.diagnostic.photoLibraryAccessLevel.ADD_ONLY){
+		console.log("L'ajout de photos est autorisé");
+	}
+	else if(cordova.plugins.diagnostic.photoLibraryAccessLevel.READ_WRITE){
+		console.log("La lecture et l'écriture de photos est autorisé");
+	}
+}
+
 function onSuccess_Photo(imageData) {
+	console.log("Fraulein");
 	//Création d'une balise image
 	let ph = document.getElementById("photos");
 	essai = document.getElementById("image");
 
-	
 	localStorage.removeItem("PHOTO");
 	localStorage.setItem("PHOTO", imageData);
 	let img_ajout = document.createElement('img');
@@ -285,7 +335,7 @@ function onSuccess_Photo(imageData) {
 }
 
 function onFail_Photo(message) {
-	alert('Failed because: ' + message);
+	alert('Echec de la prise de photo: ' + message);
 }
 
 function ShowProfile(){
