@@ -53,16 +53,29 @@ mdl-layout--fixed-tabs">
         
             <section class="mdl-layout__tab-panel" id="fixed-tab-4">
             <div class="page-content">
+                <div id="profil">
                 <center>
                     <h1>Mon Profil</h1>
-                    <h2>Nom de la personne</h2>
-                    <div>Description du profil</div>
+
+                    <h2 id="pseudo">Nom de la personne</h2>
+
+                    <div id="description">Description du profil</div>
                     <div id="photos"></div>
-                    <button id="modif_photos">Modifier mes photos</button>
-                    <button>Modifier le profil</button>
-                    <button id="Storage">Vider le local Storage</button>
-                    <button>Se déconnecter</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="modif_photos">Modifier mes photos</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="modif_profil">Modifier le profil</button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Storage">Vider le local Storage</button>
                 </center>
+                </div>
+                <div id='modif'>
+                    <h1>Modifier le profil</h1>
+                    <form>
+                        <input type="text" id="pseudo_modif" placeholder="Changer son pseudonyme"></input>
+                        <input type="text" id="description_modif" placeholder="Changer sa description"></input>
+                        
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Validation">Valider</button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Annulation">Annuler</button>
+                    </form>
+                </div>
             </div>
         </section>
         </div>
@@ -72,7 +85,7 @@ mdl-layout--fixed-tabs">
             <h2>Vous n'êtes pas connecté à internet</h2>
             <h3>Veuillez vous connecter à internet pour utiliser l'application</h3>
             <img id='NoWifi' src='./img/NoWifi.png' alt='NoWifi'>
-            <button id="Active_DATA">Activer les données mobiles</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Active_DATA">Activer les données mobiles</button>
             </center>
         </div>
 </main>
@@ -82,7 +95,7 @@ mdl-layout--fixed-tabs">
     <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Découvrir</a>
     <a href="#fixed-tab-2" class="mdl-layout__tab">Map</a>
     <a href="#fixed-tab-3" class="mdl-layout__tab">Chat</a>
-    <a href="#fixed-tab-4" id="Profil" class="mdl-layout__tab">Profil</a>
+    <a href="#fixed-tab-4" id="Compte" class="mdl-layout__tab">Profil</a>
     </div>
     </footer>
 </div>

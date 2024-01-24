@@ -8,15 +8,24 @@ const URL = 'https://corsproxy.io/?' + encodeURIComponent(LIEN_API);
 const MAIN = document.getElementById("page-content");
 const FOOT = document.getElementById("footer");
 const ERROR = document.getElementById("error");
+
 const BTN_DATA = document.getElementById("Active_DATA");
 const BTN_REMOVE = document.getElementById("Storage");
 const BTN_PHOTOS = document.getElementById("modif_photos");
-const PDP = document.getElementById("Profil");
+const BTN_PROFIL = document.getElementById("modif_profil");
+
+const COMPTE = document.getElementById("Compte");
+const PROFIL = document.getElementById("profil");
+const MODIF_PROFIL = document.getElementById("modif");
+const VALID = document.getElementById("Validation");
+const ANNUL = document.getElementById("Annulation");
+
 
 
 let salle = new Array;
 let gps = new Array;
 let response = new Array;
+let donnee ="";	
 
 
 document.addEventListener("deviceready", onDeviceReady);
@@ -50,14 +59,21 @@ function onDeviceReady()
 	//Vérification de la connexion internet
 	document.addEventListener("offline", onOffline, false);
 	document.addEventListener("online", onOnline, false);
+	
+	
+
 	BTN_REMOVE.addEventListener("click", Remove);
 	BTN_PHOTOS.addEventListener("click", NewPhotos);
-	PDP.addEventListener("click", ShowProfile);
-
-
+	BTN_PROFIL.addEventListener("click", ModifProfile);
+	COMPTE.addEventListener("click", ShowProfile);
+	VALID.addEventListener("click", ValidProfile);
+	ANNUL.addEventListener("click", ReturnProfile);
+	
+	PROFIL.style.display = "block";
 	MAIN.style.display = "block";
 	FOOT.style.display = "block";
 	ERROR.style.display = "none";
+	MODIF_PROFIL.style.display = "none";
 	
 	/////////////////////////////////////////////////////////------------------------------------///////////////////////////////
 	  
@@ -127,6 +143,7 @@ function onOnline() {
 	FOOT.style.display = "block";
 	ERROR.style.display = "none";
 
+
 	let networkState = navigator.connection.type;
 	if (networkState !== Connection.NONE) {
 		if(localStorage.getItem("MAP")){
@@ -147,8 +164,15 @@ function onOnline() {
 			for (let i=0; i <(salle.length); i++)
 				{
 					// Parcourt le tableau GPS et ajoute chaque point à la carte
-
-					L.marker([gps[i].lat, gps[i].lon], {icon: punch}).addTo(map).bindPopup(salle[i],{ className: 'custom-popup' }); // Ajoute une infobulle avec le nom de la salle
+					let div = document.createElement('div');
+						div.id = "PopUp";
+						div.innerHTML = salle[i]+'<br>';
+						button = document.createElement('button');
+						button.id = "PopUpButton";
+						button.innerHTML = "Allez à la salle";
+						div.appendChild(button);
+						donnee = salle[i];
+					L.marker([gps[i].lat, gps[i].lon], {icon: punch}).addTo(map).bindPopup(div); // Ajoute une infobulle avec le nom de la salle
 				}
 			
 			console.log("Fin du traitement");
@@ -157,12 +181,14 @@ function onOnline() {
 			console.log("MAP par API");
 			clickOnELE();
 		}
+		
 	}
 
+	
 }
 
 
-function clickOnELE(event){
+function clickOnELE(){
 
 	const XHR = new XMLHttpRequest();
 	
@@ -231,8 +257,15 @@ function statechange(event)
 				for (let i=0; i <(salle.length); i++)
 					{
 						// Parcourt le tableau GPS et ajoute chaque point à la carte
+						let div = document.createElement('div');
+						div.innerHTML = salle[i]+'<br>';
+						button = document.createElement('button');
+						button.id = "PopUp_Button";
+						button.innerHTML = "Allez à la salle";
+						div.appendChild(button);
+						map.on('click', NewBrowser);
 
-    					L.marker([gps[i].lat, gps[i].lon], {icon: punch}).addTo(map).bindPopup(salle[i],{ className: 'custom-popup' }); // Ajoute une infobulle avec le nom de la salle
+    					L.marker([gps[i].lat, gps[i].lon], {icon: punch}).addTo(map).bindPopup(div).openOn(map);; // Ajoute une infobulle avec le nom de la salle
 					}
 				
 				console.log("Fin du traitement");
@@ -253,70 +286,23 @@ function statechange(event)
 	
 }
 
+
+
 /////////////////MISE EN PLACE DU PROFIL////////////////////////
 
 
 
 function NewPhotos() {
+
 	console.log("Autorisation de l'accès à la caméra");
-	cordova.plugins.diagnostic.isCameraAuthorized(successCallback_Auto, errorCallback, storage)
-	
-}
-
-function successCallback_Auto(status){
-	console.log("Le statut est :" + status);
-	if(status == true){
-		console.log("L'accès à la caméra est autorisé");
-		console.log("Nouvelle photo");
-		navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
-	}
-	else if (status == false){
-		cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
-	}
-	
-}
-
-function successCallback(status){
-	console.log("Le statut est :" + status);
-	switch(status){
-        case cordova.plugins.diagnostic.permissionStatus.GRANTED:
-            console.log("La Permission d'utiliser la caméra");
-			navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
-
-            break;
-        case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
-            console.log("La permission n'a pas été demandée");
-			cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
-            break;
-        case cordova.plugins.diagnostic.permissionStatus.DENIED_ONCE:
-            console.log("La Permission a été refusée");
-			cordova.plugins.diagnostic.requestCameraAuthorization(successCallback, errorCallback);
-            break;
-        case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
-            console.log("La Permission d'utiliser la caméra:)");
-			console.log("Problème Samsung à régler")
-			navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
-            break;
-    }
-}
-function errorCallback(error){
-	console.log("L'accès à la caméra a été refusé");
-	console.log(error);
+	navigator.camera.getPicture(onSuccess_Photo, onFail_Photo, { quality: 45, destinationType: Camera.DestinationType.DATA_URL});
 
 }
 
-function storage(){
-	console.log("L'accès au stockage est autorisé");
-	if(cordova.plugins.diagnostic.photoLibraryAccessLevel.ADD_ONLY){
-		console.log("L'ajout de photos est autorisé");
-	}
-	else if(cordova.plugins.diagnostic.photoLibraryAccessLevel.READ_WRITE){
-		console.log("La lecture et l'écriture de photos est autorisé");
-	}
-}
 
 function onSuccess_Photo(imageData) {
-	console.log("Fraulein");
+
+
 	//Création d'une balise image
 	let ph = document.getElementById("photos");
 	essai = document.getElementById("image");
@@ -340,7 +326,18 @@ function onFail_Photo(message) {
 
 function ShowProfile(){
 	console.log("Affichage du profil");
+
+
+	
+	
 	let ph_prof = document.getElementById("photos");
+	pseudo = document.getElementById("pseudo");
+	descript = document.getElementById("description");
+
+	//Affichage du profil
+	pseudo.innerHTML = localStorage.getItem("PSEUDO");
+	descript.innerHTML = localStorage.getItem("DESCRIPTION");
+
 	image = document.getElementById("image");
 	if(image == null){
 		let img_prof = document.createElement('img');
@@ -348,5 +345,62 @@ function ShowProfile(){
 		img_prof.src = "data:image/jpeg;base64," + localStorage.getItem("PHOTO");
 		ph_prof.appendChild(img_prof);
 	}
+	PROFIL.style.display = "block";
+	MODIF_PROFIL.style.display = "none";
 	
 }
+
+function ModifProfile(){
+	console.log("Modification du profil");
+	//Affichage du formulaire de modification
+	PROFIL.style.display = "none";
+	MODIF_PROFIL.style.display = "block";
+}
+
+function ValidProfile(){
+	console.log("Modification du profil");
+	//Récupération des données
+	let pseudo = document.getElementById("pseudo_modif").value;
+	let descript = document.getElementById("description_modif").value;
+	
+	//Stockage des données
+	localStorage.setItem("PSEUDO", pseudo);
+	localStorage.setItem("DESCRIPTION", descript);
+
+	console.log("Affichage du profil");
+	console.log("Pseudo : "+localStorage.getItem("PSEUDO"));
+	console.log("Description : "+localStorage.getItem("DESCRIPTION"));
+
+	//Affichage du profil
+	ShowProfile();
+}
+
+function ReturnProfile(){
+	//Permet de réafficher le profil et d'enlever le formulaire de modification
+	PROFIL.style.display = "block";
+	MODIF_PROFIL.style.display = "none";
+}
+
+
+
+///Redirection vers google maps avec les coordonnées de la salle
+function NewBrowser(){
+	console.log("Redirection vers google maps");
+	Name = document.getElementById("NameSalle").innerHTML;
+	
+	response = localStorage.getItem("MAP");
+	response = JSON.parse(response);
+	let i = 0;
+	while( i<(response.results.length && find == false)){
+		if(response.results[i].insnom == Name){
+			lat = response.results[i].gps.lat;
+			lon = response.results[i].gps.lon;
+			find = true;
+		}
+
+		i++;
+	}
+	link = "https://www.google.fr/maps/place/"+lat+","+lon;
+	console.log("Passage dans le navigateur");
+	cordova.InAppBrowser.open(link, '_system', 'location=yes');
+} 
