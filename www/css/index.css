@@ -1,4 +1,4 @@
-
+@import url('https://fonts.cdnfonts.com/css/sportive-3');
 
 *{
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
@@ -17,15 +17,9 @@ body {
     
 }
 
-
-
 h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+    font-family: 'SPORTIVE', sans-serif;
+    text-align: center ;
 }
 
 .event {
@@ -49,6 +43,19 @@ h1 {
 #deviceready.ready .event.listening { display: none; }
 #deviceready.ready .event.received { display: block; }
 
+.swiper {
+    padding-top: 20px;
+    width: 340px;
+    height: 800px;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
@@ -60,9 +67,11 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-#map { height: 900px; }
+#map { 
+    height: 900px;
+ }
 
-#NoWifi{
+#NoWifi {
     
     width: 80%;
     height: 90%;
@@ -71,16 +80,50 @@ h1 {
     
     display: flex;
 }
-#photos{
-    width: 300px;
-    height: 300px;
+
+#demo-menu-lower-left{
+    height: 50px;
+    width: 50px;
 }
 #image{
-    width: 80%;
-    height: 80%;
+    width: 200px;
+    height: 200px;
     rotate: 90deg;
+    border-radius: 50%;
 }
 
+#Gallery img{
+
+    margin-top: 50px;
+    width: 115px;
+    height: 115px;
+    padding: 10px;
+    rotate: 90deg;
+    display: inline-block;
+    
+}
+#Gallery img{
+    border-left: 100px;
+}
+#fixed-tab-3 h1{
+    font-size: 50px;
+}
+#fixed-tab-3 img{
+    width: 100%;
+}
+#profil h1{
+    font-family: 'SPORTIVE', sans-serif;
+    margin-top: 0px;
+    text-decoration: underline;
+}
+h2{
+    margin-bottom: 50px;
+}
+#description {
+    font-family: 'SPORTIVE', sans-serif;
+    font-size: 20px;
+
+}
 
 button{
     height: 40px;

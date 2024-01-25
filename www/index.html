@@ -7,17 +7,15 @@
         <link rel="stylesheet" href="css/leaflet.css" />
         <script src="js/leaflet.js"></script>
 
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <link rel="stylesheet" href="css/index.css">
+        <!-- Ajout des librairies graphiques mdl & swiper -->
         <link rel="stylesheet" href="./mdl/material.min.css">
     <script src="./mdl/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  
+    <link rel="stylesheet" href="css/index.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   
     <title>Clash and Connect</title>
@@ -28,50 +26,87 @@ mdl-layout--fixed-tabs">
 
 <main class="mdl-layout__content">
     <div id="page-content">
-            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-            <div class="page-content">
-                
-    
+
+        <!-- Slide des profils -->
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="./img/pierre/pdp.jpeg" alt="pierre"></div>
+                    <div class="swiper-slide"><img src="./img/Kamaru_Usman/img/pdp.jpg" alt="Kamaru_Usman"></div>
+                    <div class="swiper-slide"><img src="./img/Keryann_Sauer/img/pdp.jpg" alt="Keryann_Sauer"></div>
+                </div>
             </div>
         </section>
         
         
-            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
             <div class="page-content">
                 <div id="map"></div>
+                <div id="tableau"></div>
             </div>
 
-            </section>
+        </section>
        
-            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-
-            <div class="page-content">Mettre le chat ici
-
+        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+            <!--  Page du chat -->
+            <!-- En cours de développement -->
+            <div class="page-content">
+                <h1>L'échauffement n'est pas terminé</h1>
+                <img src="./img/runner.png" alt="Toujours Vaillant">
             </div>
 
-            </section>
+        </section>
         
-            <section class="mdl-layout__tab-panel" id="fixed-tab-4">
+        
+        <section class="mdl-layout__tab-panel" id="fixed-tab-4">
             <div class="page-content">
                 <div id="profil">
+                    <!-- Bouton des paramètres -->
+                <button id="demo-menu-lower-left"
+                class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">more_vert</i>
+                </button>
+
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-left">
+                    <li class="mdl-menu__item" id="perm_Connex">Permissions Connexion</li>
+                    <li class="mdl-menu__item" id="perm_Photo">Permissions Photos</li>
+                    <li class="mdl-menu__item" id="Storage">Vider la localisation du local Storage</li>
+                </ul>
                 <center>
-                    <h1>Mon Profil</h1>
-
-                    <h2 id="pseudo">Nom de la personne</h2>
-
-                    <div id="description">Description du profil</div>
+                    <!-- Affichage du profil -->
                     <div id="photos"></div>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="modif_photos">Modifier mes photos</button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="modif_profil">Modifier le profil</button>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Storage">Vider le local Storage</button>
+                    <h1>Mon Profil</h1>
+                    <h2 id="pseudo">Nom de la personne</h2>
+                    <div id="description">Description du profil</div>
+
+                    
                 </center>
+                
+                <center>
+                    <!-- Boutons de liés aux comptes  -->
+                    <button id="modif_photos">Modifier mes photos</button>
+                    <button id="modif_profil">Modifier le profil</button>
+                    <button id="modif_gallerie">Photos Gallerie</button>
+                </center>
+                <!-- div pour mettre les photos de la gallerie -->
+                <div id="Gallery"></div>
+        
                 </div>
+                <!-- Formulaire de modification du profil -->
                 <div id='modif'>
                     <h1>Modifier le profil</h1>
                     <form>
-                        <input type="text" id="pseudo_modif" placeholder="Changer son pseudonyme"></input>
-                        <input type="text" id="description_modif" placeholder="Changer sa description"></input>
-                        
+                        <!-- Modification du Pseudonyme -->
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" id="pseudo_modif" type="text" id="sample1">
+                            <label class="mdl-textfield__label" for="sample1">Nouveau Pseudo</label>
+                        </div>
+                        <!-- Modification de la description -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                              <textarea class="mdl-textfield__input" id="description_modif" type="text" rows= "3" id="sample5" ></textarea>
+                              <label class="mdl-textfield__label"  for="sample5">Changer la description</label>
+                            </div>
+
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Validation">Valider</button>
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="Annulation">Annuler</button>
                     </form>
@@ -79,6 +114,7 @@ mdl-layout--fixed-tabs">
             </div>
         </section>
         </div>
+        <!-- Page d'echec de la connexion Internet -->
         <div id="error">
             <center>
             <h1>Erreur</h1>
@@ -90,13 +126,12 @@ mdl-layout--fixed-tabs">
         </div>
 </main>
 <footer id="footer" class="mdl-layout__header">
-    <!-- Tabs -->
+    <!-- Bandeau du bas -->
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
     <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Découvrir</a>
     <a href="#fixed-tab-2" class="mdl-layout__tab">Map</a>
     <a href="#fixed-tab-3" class="mdl-layout__tab">Chat</a>
     <a href="#fixed-tab-4" id="Compte" class="mdl-layout__tab">Profil</a>
-    </div>
     </footer>
 </div>
         
