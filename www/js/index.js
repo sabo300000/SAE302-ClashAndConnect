@@ -432,7 +432,7 @@ function ReturnProfile(){
 ///Redirection vers google maps avec les coordonnées de la salle
 /*
 function NewBrowser(event){
-	console.log("Essai COOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON"+event.target.id);
+	console.log("Essai con"+event.target.id);
 	console.log("Redirection vers google maps");
 	
 	
